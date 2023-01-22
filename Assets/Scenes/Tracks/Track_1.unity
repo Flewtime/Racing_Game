@@ -1322,6 +1322,17 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 288474228}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &300397384 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3312395251554766081, guid: a31cc271a76e91b4e8b7a0c2b43a4660, type: 3}
+  m_PrefabInstance: {fileID: 1778325035}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 22ea3ff8482e1364aa78f94a085f35b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &316810498
 GameObject:
   m_ObjectHideFlags: 0
@@ -3461,6 +3472,17 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 874873681}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &879899677 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3312395251554766081, guid: a31cc271a76e91b4e8b7a0c2b43a4660, type: 3}
+  m_PrefabInstance: {fileID: 377704917}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 22ea3ff8482e1364aa78f94a085f35b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &894306408
 GameObject:
   m_ObjectHideFlags: 0
@@ -4594,6 +4616,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6624937d7c19ea5408a8bdb6d17de796, type: 3}
+--- !u!114 &1049813167 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3312395251554766081, guid: a31cc271a76e91b4e8b7a0c2b43a4660, type: 3}
+  m_PrefabInstance: {fileID: 1711210168}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 22ea3ff8482e1364aa78f94a085f35b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1052951637
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5095,6 +5128,17 @@ Transform:
   m_Father: {fileID: 1027422746}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1100048329 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3312395251554766081, guid: a31cc271a76e91b4e8b7a0c2b43a4660, type: 3}
+  m_PrefabInstance: {fileID: 1544631784}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 22ea3ff8482e1364aa78f94a085f35b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &1100834346 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -4216859302048453862, guid: 7c16b94cf88150a4a9b0a48148025bfd, type: 3}
@@ -5732,6 +5776,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -4216859302048453862, guid: 06364542d1557af4880e8f628d6c4a05, type: 3}
   m_PrefabInstance: {fileID: 3381725851225550}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1304999214 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3312395251554766081, guid: a31cc271a76e91b4e8b7a0c2b43a4660, type: 3}
+  m_PrefabInstance: {fileID: 2052182307}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 22ea3ff8482e1364aa78f94a085f35b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &1316311826 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -4216859302048453862, guid: 4243275ff5130a5438ef97223ee76672, type: 3}
@@ -8268,6 +8323,15 @@ MonoBehaviour:
   - {fileID: 637756883}
   - {fileID: 216056411}
   totalLaps: 5
+  playerCar: {fileID: 3381724264504152}
+  allAICars:
+  - {fileID: 300397384}
+  - {fileID: 1049813167}
+  - {fileID: 1304999214}
+  - {fileID: 1100048329}
+  - {fileID: 879899677}
+  playerPosition: 0
+  timeBetweenPosCheck: 0.2
 --- !u!4 &1946762351 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -4216859302048453862, guid: a5dda521e4327cf4f838ecf5ebe6c467, type: 3}
@@ -9107,6 +9171,7 @@ MonoBehaviour:
   engineSFX: {fileID: 3381725420108654}
   ngepotSFX: {fileID: 3381726185486686}
   ngepotFadeSpeed: 5
+  nextCheckpoint: 0
   currentLap: 1
   lapTime: 0
   bestLapTime: 0

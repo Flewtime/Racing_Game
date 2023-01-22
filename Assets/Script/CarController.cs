@@ -38,8 +38,7 @@ public class CarController : MonoBehaviour
     public AudioSource engineSFX, ngepotSFX;
     public float ngepotFadeSpeed;
 
-    private int nextCheckpoint;
-
+    public int nextCheckpoint;
     public int currentLap;
 
     public float lapTime, bestLapTime;
