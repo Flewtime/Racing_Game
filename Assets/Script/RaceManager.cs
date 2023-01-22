@@ -51,6 +51,8 @@ public class RaceManager : MonoBehaviour
             }
         }
         posCheckCounter = timeBetweenPosCheck;
+
+        UIManager.instance.positionText.text = playerPosition + "/" + (allAICars.Count + 1);
         }
     }
 }
