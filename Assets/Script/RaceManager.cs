@@ -15,6 +15,8 @@ public class RaceManager : MonoBehaviour
     public float timeBetweenPosCheck = .2f;
     private float posCheckCounter;
 
+    public float AIDefaultSpeed = 30f, playerDefaultSpeed = 30f, rubberBandSpeedModifier = 3.5f, rubberBandAcceleration = 0.5f;
+
     private void Awake() {
         instance = this;
     }
@@ -53,6 +55,24 @@ public class RaceManager : MonoBehaviour
         posCheckCounter = timeBetweenPosCheck;
 
         UIManager.instance.positionText.text = playerPosition + "/" + (allAICars.Count + 1);
+        }
+
+        // Improve AI(Rubber Banding)
+        if(playerPosition == 1)
+        {
+            foreach(CarController AIcar in allAICars){
+                AIcar.maxSpeed = Mathf.MoveTowards(AIcar.maxSpeed, AIDefaultSpeed + rubberBandSpeedModifier, rubberBandAcceleration * Time.deltaTime);
+            }
+
+            playerCar.maxSpeed = Mathf.MoveTowards(playerCar.maxSpeed, playerDefaultSpeed - rubberBandSpeedModifier, rubberBandAcceleration * Time.deltaTime);
+        }
+        else {
+            foreach(CarController AIcar in allAICars)
+            {
+                AIcar.maxSpeed = Mathf.MoveTowards(AIcar.maxSpeed, AIDefaultSpeed - (rubberBandSpeedModifier * ((float) playerPosition / ((float)allAICars.Count + 1))), rubberBandAcceleration * Time.deltaTime);
+            }
+            // playerCar.maxSpeed = Mathf.MoveTowards(playerCar.maxSpeed, playerDefaultSpeed + (rubberBandSpeedModifier * (playerPosition / (allAICars.Count + 1))), rubberBandAcceleration * Time.deltaTime);
+            playerCar.maxSpeed = Mathf.MoveTowards(playerCar.maxSpeed, playerDefaultSpeed + (rubberBandSpeedModifier * ((float) playerPosition / ((float)allAICars.Count + 1))), rubberBandAcceleration * Time.deltaTime);
         }
     }
 }
