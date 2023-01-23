@@ -43,6 +43,9 @@ public class CarController : MonoBehaviour
 
     public float lapTime, bestLapTime;
 
+    public float resetCooldown;
+    private float resetCounter;
+
     public bool isAI;
 
     // AI Fundamentals
@@ -63,6 +66,8 @@ public class CarController : MonoBehaviour
         }
 
         dragOnGround = theRB.drag;
+
+        resetCounter = resetCooldown;
     }
 
     // Update is called once per frame
@@ -94,6 +99,14 @@ public class CarController : MonoBehaviour
         /* if(grounded && Input.GetAxis("Vertical") != 0){
             transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles + new Vector3(0f,turnInput * turnStrength * Time.deltaTime * Mathf.Sign(speedInput) * (theRB.velocity.magnitude / maxSpeed), 0f));
         } */
+        if(resetCounter > 0){
+            resetCounter -= Time.deltaTime;
+        }
+
+        if(Input.GetKeyDown(KeyCode.R) && resetCounter <= 0)
+        {
+            resetToTrack();
+        }
 
         } else 
         {
@@ -278,5 +291,23 @@ public class CarController : MonoBehaviour
     public void RandomiseAITarget()
     {
         targetPoint += new Vector3(Random.Range(-aiPointVariance, aiPointVariance), 0f, Random.Range(-aiPointVariance, aiPointVariance));
+    }
+
+    void resetToTrack()
+    {
+        int pointToGoTo = nextCheckpoint - 1; 
+        if(pointToGoTo < 0)
+        {
+            pointToGoTo = RaceManager.instance.allCheckPoints.Length - 1;
+        }
+
+        transform.position = RaceManager.instance.allCheckPoints[pointToGoTo].transform.position;
+        theRB.transform.position = transform.position;
+        theRB.velocity = Vector3.zero;
+
+        speedInput = 0f;
+        turnInput = 0f;
+
+        resetCounter = resetCooldown;
     }
 }
