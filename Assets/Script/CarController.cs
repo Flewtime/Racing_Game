@@ -68,6 +68,10 @@ public class CarController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(!RaceManager.instance.isStarting)
+        {
+
+        
         lapTime += Time.deltaTime;
 
         if(!isAI)
@@ -166,7 +170,7 @@ public class CarController : MonoBehaviour
                 ngepotSFX.volume = Mathf.MoveTowards(ngepotSFX.volume, 0f, ngepotFadeSpeed * Time.deltaTime);
             }
         }
-
+        }
     }
 
 

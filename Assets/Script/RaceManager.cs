@@ -33,6 +33,7 @@ public class RaceManager : MonoBehaviour
 
         isStarting = true;
         startCounter = timeBetweenStartCount;
+        UIManager.instance.countdownText.text = countDownCurrent + "!";
     }
 
     // Update is called once per frame
@@ -45,8 +46,13 @@ public class RaceManager : MonoBehaviour
                 countDownCurrent--;
                 startCounter = timeBetweenStartCount;
 
+                UIManager.instance.countdownText.text = countDownCurrent + "!";
+
                 if(countDownCurrent == 0){
                     isStarting = false;
+
+                    UIManager.instance.countdownText.gameObject.SetActive(false);
+                    UIManager.instance.goText.gameObject.SetActive(true);
                 }
             }
 
