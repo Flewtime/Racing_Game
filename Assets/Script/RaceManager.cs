@@ -17,6 +17,11 @@ public class RaceManager : MonoBehaviour
 
     public float AIDefaultSpeed = 30f, playerDefaultSpeed = 30f, rubberBandSpeedModifier = 3.5f, rubberBandAcceleration = 0.5f;
 
+    public bool isStarting;
+    public float timeBetweenStartCount = 1f;
+    private float startCounter;
+    public int countDownCurrent = 3;
+
     private void Awake() {
         instance = this;
     }
@@ -25,54 +30,71 @@ public class RaceManager : MonoBehaviour
         for(int i = 0; i < allCheckPoints.Length; i++){
             allCheckPoints[i].checkPointNumber = i;
         }
+
+        isStarting = true;
+        startCounter = timeBetweenStartCount;
     }
 
     // Update is called once per frame
     void Update()
     {
-        posCheckCounter -= Time.deltaTime;
-        if(posCheckCounter <= 0){
-        playerPosition = 1;
-        foreach(CarController AIcar in allAICars)
+        if(isStarting)
         {
-            if(AIcar.currentLap > playerCar.currentLap)
+            startCounter -= Time.deltaTime;
+            if(startCounter <= 0){
+                countDownCurrent--;
+                startCounter = timeBetweenStartCount;
+
+                if(countDownCurrent == 0){
+                    isStarting = false;
+                }
+            }
+
+        } else {
+            posCheckCounter -= Time.deltaTime;
+            if(posCheckCounter <= 0){
+            playerPosition = 1;
+            foreach(CarController AIcar in allAICars)
             {
-                playerPosition++;
-            } else if(AIcar.currentLap == playerCar.currentLap)
-            {
-                if(AIcar.nextCheckpoint > playerCar.nextCheckpoint)
+                if(AIcar.currentLap > playerCar.currentLap)
                 {
                     playerPosition++;
-                } else if(AIcar.nextCheckpoint == playerCar.nextCheckpoint)
+                } else if(AIcar.currentLap == playerCar.currentLap)
                 {
-                    if(Vector3.Distance(AIcar.transform.position, allCheckPoints[AIcar.nextCheckpoint].transform.position) < Vector3.Distance(playerCar.transform.position, allCheckPoints[AIcar.nextCheckpoint].transform.position))
+                    if(AIcar.nextCheckpoint > playerCar.nextCheckpoint)
                     {
                         playerPosition++;
+                    } else if(AIcar.nextCheckpoint == playerCar.nextCheckpoint)
+                    {
+                        if(Vector3.Distance(AIcar.transform.position, allCheckPoints[AIcar.nextCheckpoint].transform.position) < Vector3.Distance(playerCar.transform.position, allCheckPoints[AIcar.nextCheckpoint].transform.position))
+                        {
+                            playerPosition++;
+                        }
                     }
                 }
             }
-        }
-        posCheckCounter = timeBetweenPosCheck;
+            posCheckCounter = timeBetweenPosCheck;
 
-        UIManager.instance.positionText.text = playerPosition + "/" + (allAICars.Count + 1);
-        }
-
-        // Improve AI(Rubber Banding)
-        if(playerPosition == 1)
-        {
-            foreach(CarController AIcar in allAICars){
-                AIcar.maxSpeed = Mathf.MoveTowards(AIcar.maxSpeed, AIDefaultSpeed + rubberBandSpeedModifier, rubberBandAcceleration * Time.deltaTime);
+            UIManager.instance.positionText.text = playerPosition + "/" + (allAICars.Count + 1);
             }
 
-            playerCar.maxSpeed = Mathf.MoveTowards(playerCar.maxSpeed, playerDefaultSpeed - rubberBandSpeedModifier, rubberBandAcceleration * Time.deltaTime);
-        }
-        else {
-            foreach(CarController AIcar in allAICars)
+            // Improve AI(Rubber Banding)
+            if(playerPosition == 1)
             {
-                AIcar.maxSpeed = Mathf.MoveTowards(AIcar.maxSpeed, AIDefaultSpeed - (rubberBandSpeedModifier * ((float) playerPosition / ((float)allAICars.Count + 1))), rubberBandAcceleration * Time.deltaTime);
+                foreach(CarController AIcar in allAICars){
+                    AIcar.maxSpeed = Mathf.MoveTowards(AIcar.maxSpeed, AIDefaultSpeed + rubberBandSpeedModifier, rubberBandAcceleration * Time.deltaTime);
+                }
+
+                playerCar.maxSpeed = Mathf.MoveTowards(playerCar.maxSpeed, playerDefaultSpeed - rubberBandSpeedModifier, rubberBandAcceleration * Time.deltaTime);
             }
-            // playerCar.maxSpeed = Mathf.MoveTowards(playerCar.maxSpeed, playerDefaultSpeed + (rubberBandSpeedModifier * (playerPosition / (allAICars.Count + 1))), rubberBandAcceleration * Time.deltaTime);
-            playerCar.maxSpeed = Mathf.MoveTowards(playerCar.maxSpeed, playerDefaultSpeed + (rubberBandSpeedModifier * ((float) playerPosition / ((float)allAICars.Count + 1))), rubberBandAcceleration * Time.deltaTime);
+            else {
+                foreach(CarController AIcar in allAICars)
+                {
+                    AIcar.maxSpeed = Mathf.MoveTowards(AIcar.maxSpeed, AIDefaultSpeed - (rubberBandSpeedModifier * ((float) playerPosition / ((float)allAICars.Count + 1))), rubberBandAcceleration * Time.deltaTime);
+                }
+                // playerCar.maxSpeed = Mathf.MoveTowards(playerCar.maxSpeed, playerDefaultSpeed + (rubberBandSpeedModifier * (playerPosition / (allAICars.Count + 1))), rubberBandAcceleration * Time.deltaTime);
+                playerCar.maxSpeed = Mathf.MoveTowards(playerCar.maxSpeed, playerDefaultSpeed + (rubberBandSpeedModifier * ((float) playerPosition / ((float)allAICars.Count + 1))), rubberBandAcceleration * Time.deltaTime);
+            }
         }
     }
 }
