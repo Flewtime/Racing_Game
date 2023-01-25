@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class RaceManager : MonoBehaviour
 {
@@ -28,6 +29,8 @@ public class RaceManager : MonoBehaviour
     public List<CarController> carsToSpawn = new List<CarController>();
 
     public bool raceFisish;
+
+    public string raceCompletedScene;
 
     private void Awake() {
         instance = this;
@@ -133,5 +136,29 @@ public class RaceManager : MonoBehaviour
 
     public void FinishRace(){
         raceFisish = true;
+
+        switch(playerPosition)
+        {
+            case 1:
+            UIManager.instance.raceResultText.text = "You Finished 1st";
+                break;
+            case 2:
+            UIManager.instance.raceResultText.text = "You Finished 2nd";
+                break;
+            case 3:
+            UIManager.instance.raceResultText.text = "You Finished 3rd";
+                break;
+            default:
+            UIManager.instance.raceResultText.text = "You Finished " + playerPosition + "th";
+            break;
+        }
+
+        
+
+        UIManager.instance.resultsScreen.SetActive(true);
+    }
+    public void ExitRace()
+    {
+        SceneManager.LoadScene(raceCompletedScene);
     }
 }

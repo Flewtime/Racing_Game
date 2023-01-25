@@ -7,8 +7,9 @@ public class UIManager : MonoBehaviour
 {
     public static UIManager instance;
 
-    public TMP_Text lapCounterText, bestLapTimeText, CurrLapTimeText, positionText, countdownText, goText;
+    public TMP_Text lapCounterText, bestLapTimeText, CurrLapTimeText, positionText, countdownText, goText, raceResultText;
 
+    public GameObject resultsScreen;
     private void Awake() {
         instance = this;
     }
@@ -21,5 +22,10 @@ public class UIManager : MonoBehaviour
     void Update()
     {
         
+    }
+    
+    public void ExitRace()
+    {
+        RaceManager.instance.ExitRace();
     }
 }
