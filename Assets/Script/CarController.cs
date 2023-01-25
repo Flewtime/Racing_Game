@@ -277,17 +277,36 @@ public class CarController : MonoBehaviour
         if(lapTime < bestLapTime || bestLapTime == 0){
             bestLapTime = lapTime;
         }
-
-        lapTime = 0f;
-
-        if(!isAI)
+        if(currentLap <= RaceManager.instance.totalLaps)
         {
-        var ts = System.TimeSpan.FromSeconds(bestLapTime);
-        UIManager.instance.bestLapTimeText.text = string.Format("{0:00}m{1:00}.{2:000}s", ts.Minutes, ts.Seconds, ts.Milliseconds);
+            lapTime = 0f;
 
-        UIManager.instance.lapCounterText.text = currentLap + "/" + RaceManager.instance.totalLaps;
+            if(!isAI)
+            {
+                var ts = System.TimeSpan.FromSeconds(bestLapTime);
+                UIManager.instance.bestLapTimeText.text = string.Format("{0:00}m{1:00}.{2:000}s", ts.Minutes, ts.Seconds, ts.Milliseconds);
+
+                UIManager.instance.lapCounterText.text = currentLap + "/" + RaceManager.instance.totalLaps;
+            }
+        } 
+        else 
+        {
+            if(!isAI)
+            {
+                isAI = true;
+                aiSpeedModifier = 1f;
+
+                targetPoint = RaceManager.instance.allCheckPoints[currentTarget].transform.position;
+                RandomiseAITarget();
+
+                var ts = System.TimeSpan.FromSeconds(bestLapTime);
+                UIManager.instance.bestLapTimeText.text = string.Format("{0:00}m{1:00}.{2:000}s", ts.Minutes, ts.Seconds, ts.Milliseconds);
+
+                RaceManager.instance.FinishRace();
+            }
         }
     }
+
     public void RandomiseAITarget()
     {
         targetPoint += new Vector3(Random.Range(-aiPointVariance, aiPointVariance), 0f, Random.Range(-aiPointVariance, aiPointVariance));

@@ -27,6 +27,8 @@ public class RaceManager : MonoBehaviour
 
     public List<CarController> carsToSpawn = new List<CarController>();
 
+    public bool raceFisish;
+
     private void Awake() {
         instance = this;
     }
@@ -127,5 +129,9 @@ public class RaceManager : MonoBehaviour
                 playerCar.maxSpeed = Mathf.MoveTowards(playerCar.maxSpeed, playerDefaultSpeed + (rubberBandSpeedModifier * ((float) playerPosition / ((float)allAICars.Count + 1))), rubberBandAcceleration * Time.deltaTime);
             }
         }
+    }
+
+    public void FinishRace(){
+        raceFisish = true;
     }
 }

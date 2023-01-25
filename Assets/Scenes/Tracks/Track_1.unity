@@ -8596,7 +8596,7 @@ MonoBehaviour:
   - {fileID: 2007260695}
   - {fileID: 637756883}
   - {fileID: 216056411}
-  totalLaps: 5
+  totalLaps: 1
   playerCar: {fileID: 3381724264504152}
   allAICars:
   - {fileID: 300397384}
@@ -8625,6 +8625,7 @@ MonoBehaviour:
   - {fileID: 1981405890}
   - {fileID: 1718848204}
   carsToSpawn: []
+  raceFisish: 0
 --- !u!4 &1946762351 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -4216859302048453862, guid: a5dda521e4327cf4f838ecf5ebe6c467, type: 3}
